@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Valentine</title>
+<style>
+  body {
+    background-image: url("image de coeur.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .card {
+    position: relative;
+    margin: auto;
+    background: white;
+    padding: 65px 80px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    width: 90%;
+    max-width: 400px;
+  } 
+
+  h2 { color: #ff4d6d; }
+  .buttons {
+    margin-top: 20px;
+    position: relative;
+    height: 160px;
+  }
+
+  button {
+    padding: 10px 25px;
+    border: groove;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    position: absolute;
+    box-shadow: 0 5px 40px rgba(0,0,0,0.2);
+  }
+
+  #yes {
+    background: #ff4d6d;
+    color: white;
+    left: 70%;
+    transform: translateX(-50%);
+  }
+
+  #no {
+    background: #ddd;
+    left: 10%;
+  }
+
+  #message {
+    margin-top: 60px;
+    color:#ff4d6d;
+    font-size: 18px;
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h2 id="toName">BABOUNETTE❤</h2>
+  <p>J'ai une petite question à te poser...🥺</p>
+  <p><big>Est-ce que tu veux être ma valentine?</big></p>
+  <div class="buttons">
+    <button id="no"><b>Non😢</b></button>
+    <button id="yes"><b>Oui💕</b></button>
+  </div>
+  <div id="message">Je t'aime énormément❤ Merci d'avoir dit oui😍</div>
+</div>
+
+<script>
+  const noBtn = document.getElementById("no");
+  const yesBtn = document.getElementById("yes");
+  const message = document.getElementById("message");
+  const toName = document.getElementById("toName");
+
+  // Récupérer le nom depuis le lien (query string)
+  const urlParams = new URLSearchParams(window.location.search);
+  const to = urlParams.get('to') || "Babounette";
+  toName.textContent = to + "❤";
+
+  // Fonction pour déplacer le bouton "Non"
+  function moveNo() {
+    const container = document.querySelector(".card");
+    const maxX = container.clientWidth - noBtn.offsetWidth;
+    const maxY = container.clientHeight - noBtn.offsetHeight;
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  }
+
+  // Déplacements sur hover ou tactile
+  noBtn.addEventListener("mouseover", moveNo);
+  noBtn.addEventListener("touchstart", moveNo);
+
+  // Clic sur "Oui" pour afficher le message
+  yesBtn.addEventListener("click", () => {
+    message.style.display = "block";
+  });
+</script>
+
+</body>
+</html>
